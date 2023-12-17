@@ -4,10 +4,10 @@ import com.example.weatherapp.Model.ForecastWeather.ForecastData;
 
 import java.util.List;
 
-public class ForecastResponse {
+public class ForecastRepository {
     private List<ForecastData> list;
 
-    public ForecastResponse(List<ForecastData> list) {
+    public ForecastRepository(List<ForecastData> list) {
         this.list = list;
     }
 

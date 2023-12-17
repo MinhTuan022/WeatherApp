@@ -2,7 +2,7 @@ package com.example.weatherapp;
 
 import com.example.weatherapp.Model.CurrentWeather.CurrentData;
 import com.example.weatherapp.Model.GeocodingResult;
-import com.example.weatherapp.Repositories.ForecastResponse;
+import com.example.weatherapp.Repositories.ForecastRepository;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public interface WeatherApiService {
 //            @Query("units") String units
 //    );
     @GET("data/2.5/forecast")
-    Call<ForecastResponse> getForecastWeather(
+    Call<ForecastRepository> getForecastWeather(
             @Query("lat") double lat,
             @Query("lon") double lon,
             @Query("appid") String apiKey,

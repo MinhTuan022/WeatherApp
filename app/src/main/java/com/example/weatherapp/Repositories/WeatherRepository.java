@@ -19,8 +19,6 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WeatherRepository {
     private String Api_Key = "53375e8be6744f3df37e79a1b7413d0b";
@@ -100,12 +98,12 @@ public class WeatherRepository {
 
     public LiveData<List<ForecastData>> getNext24Hours(double lat, double lon){
         MutableLiveData<List<ForecastData>> hourWeather = new MutableLiveData<>();
-        Call<ForecastResponse> call1 = apiService.getForecastWeather(lat, lon, Api_Key, "metric");
+        Call<ForecastRepository> call1 = apiService.getForecastWeather(lat, lon, Api_Key, "metric");
         // Lấy thời gian hiện tại
         long currentTimeMillis = System.currentTimeMillis() / 1000;
-        call1.enqueue(new Callback<ForecastResponse>() {
+        call1.enqueue(new Callback<ForecastRepository>() {
             @Override
-            public void onResponse(@NonNull Call<ForecastResponse> call, @NonNull Response<ForecastResponse> response) {
+            public void onResponse(@NonNull Call<ForecastRepository> call, @NonNull Response<ForecastRepository> response) {
                 if(response.isSuccessful()) {
 //                    hourWeather.setValue(response.body().getList());
                     List<ForecastData> fullData = response.body().getList();
@@ -121,7 +119,7 @@ public class WeatherRepository {
                 }
             }
             @Override
-            public void onFailure(Call<ForecastResponse> call, Throwable t) {
+            public void onFailure(Call<ForecastRepository> call, Throwable t) {
 
             }
         });
@@ -160,10 +158,10 @@ public class WeatherRepository {
 //    }
     public LiveData<List<ForecastData>> getFiveDayWeather(double lat, double lon){
         MutableLiveData<List<ForecastData>> forecastWeather = new MutableLiveData<>();
-        Call<ForecastResponse> call = apiService.getForecastWeather(lat, lon, Api_Key, "metric");
-        call.enqueue(new Callback<ForecastResponse>() {
+        Call<ForecastRepository> call = apiService.getForecastWeather(lat, lon, Api_Key, "metric");
+        call.enqueue(new Callback<ForecastRepository>() {
             @Override
-            public void onResponse(@NonNull Call<ForecastResponse> call, @NonNull Response<ForecastResponse> response) {
+            public void onResponse(@NonNull Call<ForecastRepository> call, @NonNull Response<ForecastRepository> response) {
                 if(response.isSuccessful()) {
                     response.body().getList();
                     forecastWeather.setValue(response.body().getList());
@@ -172,7 +170,7 @@ public class WeatherRepository {
             }
 
             @Override
-            public void onFailure(Call<ForecastResponse> call, Throwable t) {
+            public void onFailure(Call<ForecastRepository> call, Throwable t) {
 
             }
         });
